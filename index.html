@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إلى سارونتي</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #f3eee6;
+      color: #51413d;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 25px;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 430px;
+      padding: 45px 24px;
+      border: 1px solid #dfd2c5;
+      border-radius: 24px;
+      background: #faf7f1;
+      box-shadow: 0 12px 40px #75605212;
+    }
+
+    .flower {
+      font-size: 55px;
+      margin-bottom: 25px;
+      animation: bloom 2s ease-in-out infinite alternate;
+    }
+
+    h1 {
+      color: #762f40;
+      font-size: 30px;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+
+    .intro {
+      font-size: 17px;
+      line-height: 2;
+      color: #76645b;
+      margin-bottom: 30px;
+    }
+
+    button {
+      background: #762f40;
+      color: white;
+      border: 0;
+      border-radius: 30px;
+      padding: 14px 35px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .note {
+      margin-top: 28px;
+      color: #a18e80;
+      font-size: 12px;
+    }
+
+    @keyframes bloom {
+      from { transform: scale(.94); }
+      to { transform: scale(1.08); }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="flower">🌷</div>
+
+    <h1>إلى سارونتي</h1>
+
+    <p class="intro">
+      مو كل الصدف عادية<br>
+      وبعض الأشخاص يدخلون حياتنا<br>
+      ويصير وجودهم حكاية ما تشبه أي حكاية
+    </p>
+
+    <button onclick="startStory()">
+      ابدئي الحكاية
+    </button>
+
+    <div class="note">من سلوم، بكل الحب</div>
+  </main>
+
+  <script>
+    function startStory() {
+      alert("بعض الحكايات تستاهل نرجع لأول صفحة فيها ❤️");
+    }
+  </script>
+</body>
+</html>
