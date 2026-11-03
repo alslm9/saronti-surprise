@@ -1,133 +1,231 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#eee8df">
-  <title>إلى سارونتي</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#eee8df">
+<title>إلى سارونتي</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 24px;
-      background: #eee8df;
-      color: #55443f;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-
-    .card {
-      width: 100%;
-      max-width: 430px;
-      min-height: 570px;
-      padding: 55px 25px 35px;
-      border: 1px solid #ded2c5;
-      border-radius: 180px 180px 28px 28px;
-      background: #faf7f1;
-      text-align: center;
-      box-shadow: 0 18px 55px #55443f12;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .flower {
-      font-size: 65px;
-      margin-bottom: 25px;
-      animation: bloom 3s ease-in-out infinite alternate;
-    }
-
-    .small-title {
-      color: #9a8275;
-      font-size: 13px;
-      letter-spacing: 2px;
-      margin-bottom: 18px;
-    }
-
-    h1 {
-      color: #762f40;
-      font-size: 32px;
-      font-weight: 500;
-      margin: 0 0 22px;
-    }
-
-    .intro {
-      color: #78675e;
-      font-size: 17px;
-      line-height: 2.1;
-      margin: 0 0 32px;
-    }
-
-    button {
-      border: 0;
-      border-radius: 40px;
-      padding: 15px 38px;
-      background: #762f40;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    button:active {
-      transform: scale(.97);
-    }
-
-    .message {
-      display: none;
-      margin-top: 25px;
-      color: #762f40;
-      line-height: 2;
-      font-size: 16px;
-    }
-
-    .signature {
-      margin-top: 38px;
-      color: #a18e80;
-      font-size: 13px;
-    }
-
-    @keyframes bloom {
-      from { transform: scale(.94) rotate(-4deg); }
-      to { transform: scale(1.06) rotate(4deg); }
-    }
-  </style>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ min-height:100vh;
+ background:linear-gradient(145deg,#f8f4ee,#eee5dc);
+ color:#514039;
+ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ padding:22px;
+}
+main{
+ width:100%;
+ max-width:480px;
+ text-align:center;
+}
+.card{
+ background:rgba(255,255,255,.78);
+ border:1px solid #e5d6ca;
+ border-radius:25px;
+ padding:30px 22px;
+ box-shadow:0 15px 45px #60402a12;
+}
+.flowers{font-size:28px;letter-spacing:8px;margin:8px}
+.small{font-size:13px;color:#947b70}
+h1{color:#702c43;font-size:29px;margin:20px 0}
+h2{color:#702c43;font-size:23px}
+p{font-size:17px;line-height:2.1;white-space:pre-line}
+button{
+ border:0;
+ border-radius:30px;
+ padding:13px 25px;
+ margin:8px 4px;
+ background:#702c43;
+ color:white;
+ font-size:16px;
+ cursor:pointer;
+}
+button.secondary{background:#e9ddd5;color:#702c43}
+.progress{
+ height:4px;background:#eadfd7;border-radius:10px;
+ margin:0 0 20px;overflow:hidden
+}
+#bar{height:100%;width:0;background:#873d56;transition:.3s}
+.page{display:none;animation:appear .5s}
+.page.active{display:block}
+@keyframes appear{
+ from{opacity:0;transform:translateY(10px)}
+ to{opacity:1;transform:translateY(0)}
+}
+.signature{color:#702c43;margin-top:25px;font-size:18px}
+</style>
 </head>
 
 <body>
-  <main class="card">
-    <div class="flower">🌷</div>
+<main>
+<div class="progress"><div id="bar"></div></div>
+<div class="card">
 
-    <div class="small-title">حكاية مختلفة</div>
+<section class="page active">
+<div class="flowers">🌷 🤍 🌻</div>
+<div class="small">هناك حكاية تستحق أن تُروى</div>
+<h1>إلى سارونتي</h1>
+<p>مو كل الحكايات تبدأ بلقاء
+وبعض الأشخاص يدخلون حياتنا
+بطريقة ما كنا نتوقعها أبدًا</p>
+<p>وهذي حكايتنا أنا وأنتِ</p>
+<button onclick="next()">افتحي الحكاية</button>
+</section>
 
-    <h1>إلى سارونتي</h1>
+<section class="page">
+<div class="flowers">🤍</div>
+<h2>البداية</h2>
+<p>تدرين وش الغريب؟
+إني يوم عرفتك ما كنت أدور على حب
+ولا كان في بالي إني أتعلق بأحد
 
-    <p class="intro">
-      مو كل الصدف عادية<br>
-      وبعض الأشخاص يدخلون حياتنا<br>
-      ويصير وجودهم حكاية ما تشبه أي حكاية
-    </p>
+كانت مجرد غرفة صوتية
+ودخول عابر وكلام وضحك
+وبعدها صرت أدخل عشانك
+وأنتظر سوالفك من بين كل الناس
 
-    <button onclick="openStory()">ابدئي الحكاية</button>
+وما انتبهت إلا وأنتِ صرتِ جزءًا من يومي</p>
+<button onclick="next()">كمّلي</button>
+</section>
 
-    <p class="message" id="message">
-      على مهلك يا سارونتي...<br>
-      للحكاية بقية، وأحلى تفاصيلها لسه قدامك.
-    </p>
+<section class="page">
+<div class="flowers">🌸</div>
+<h2>السستم عطلان</h2>
+<p>ومن بين كل الذكريات
+تبقى سالفة اسمي الحقيقي من أكثرها اللي تضحكني
 
-    <div class="signature">من سلوم، بكل الحب</div>
-  </main>
+سنين وأنا مخبي اسمي
+ويوم طلع منك السؤال وانكشف الموضوع
+ارتبكت وتلعثمت
+وأنتِ ضحكتي علي
 
-  <script>
-    function openStory() {
-      document.getElementById("message").style.display = "block";
-    }
-  </script>
+ومن بعدها صار عندنا كلام ما يحتاج نشرحه لأحد
+
+أبي السستم
+والسستم عطلان</p>
+<button onclick="next()">واللي بعدها؟</button>
+</section>
+
+<section class="page">
+<div class="flowers">🌷 🌷</div>
+<h2>مكان يجمعنا رغم المسافة</h2>
+<p>تذكرين الطريق اللي عند التلة القريبة من بيتك؟
+
+كل واحد فينا كان يروح للمكان نفسه بوقت مختلف
+ويصور من نفس المكان
+لأن المسافة ما كانت تسمح لنا نكون مع بعض
+
+يمكن كانت مجرد صور وطريق
+لكن بالنسبة لي كانت طريقة صغيرة
+نحس فيها إن بيننا مكان مشترك
+
+وإلى اليوم هالذكرى لها مكانها عندي</p>
+<button onclick="next()">كمّلي يا سارونتي</button>
+</section>
+
+<section class="page">
+<div class="flowers">🤍 🌼</div>
+<h2>أيام الغياب</h2>
+<p>ما أنسى أيام الدورة العسكرية
+يوم غبت 26 يوم
+
+كنتِ تكتبين لي تفاصيل يومك
+وتنتظرين أوقات التواصل
+وتحاولين تفرحيني وتشجعيني
+حتى وأنتِ محتاجة أحد يخفف عنك
+
+يمكن ما كنت أقدر أكون موجود مثل ما أبي
+لكن كنت أشوف وقفتك معي
+وأعرف إن ورا كل رسالة قلب مشتاق
+
+ما نسيت لك هالشي يا سوسو</p>
+<button onclick="next()">باقي شيء</button>
+</section>
+
+<section class="page">
+<div class="flowers">🌻 🌷 🤍</div>
+<h2>أنتِ كما أنتِ</h2>
+<p>أحب ضحكتك
+وأحب صوتك وسوالفك
+وأحب دلعك وكلامك
+
+أحب طيبتك وحنانك
+ونضجك وطريقتك المختلفة
+وأحب إن وجودك يقدر ينسيني أشياء كثيرة
+
+أنتِ مو شخص عادي مر بحياتي
+أنتِ من أجمل الأشياء اللي صارت لي</p>
+<button onclick="next()">والأهم؟</button>
+</section>
+
+<section class="page">
+<div class="flowers">🌷 🤍 🌷</div>
+<h2>لو أختار من جديد</h2>
+<p>يمكن كلمة أحبك صارت صغيرة
+قدام كل اللي أحسه لك
+
+أنا ما أبي لحظة حلوة وتنتهي
+ولا ذكرى جميلة ونمشي بعدها
+
+أبيك في أيامي الجاية
+في ضحكتي وفي تفاصيل يومي
+وفي كل عمر باقي لي
+
+أبي أكون لك مثل ما كنتِ لي
+سند وراحة وقلب ما يتغير</p>
+<button onclick="next()">وصلنا للنهاية</button>
+</section>
+
+<section class="page">
+<div class="flowers">🤍 🌷 🌻</div>
+<h1>كل عام وأنتِ بخير يا سارونتي</h1>
+<p>كل عام وأنتِ أجمل من كل الكلام
+وكل عام وضحكتك ما تفارقك
+وكل عام وأنتِ محاطة بالحب والفرح
+
+أتمنى لك سنة تشبه قلبك
+بيضاء وحنونة ومليانة أشياء حلوة
+
+وشكرًا لأنك أنتِ
+وشكرًا على كل ذكرى جمعتني فيك
+
+من سلوم
+بكل الحب</p>
+<div class="signature">أحبك يا سارونتي 🤍</div>
+<button class="secondary" onclick="restart()">ابدئي الحكاية من جديد</button>
+</section>
+
+</div>
+</main>
+
+<script>
+const pages=document.querySelectorAll('.page');
+let current=Number(localStorage.getItem('sarontiPage')||0);
+if(current<0||current>=pages.length)current=0;
+
+function show(){
+ pages.forEach((p,i)=>p.classList.toggle('active',i===current));
+ document.getElementById('bar').style.width=
+ ((current)/(pages.length-1)*100)+'%';
+ localStorage.setItem('sarontiPage',current);
+}
+function next(){
+ if(current<pages.length-1)current++;
+ show();
+ window.scrollTo(0,0);
+}
+function restart(){
+ current=0;
+ show();
+ window.scrollTo(0,0);
+}
+show();
+</script>
 </body>
 </html>
