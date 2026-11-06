@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>مفاجأة سارونتي | قصة حب وذكريات</title>
+    <title>سارونتي | أجمل حكاية</title>
     <style>
         :root {
-            --burgundy: #2D080E;
-            --burgundy-deep: #1A0408;
-            --burgundy-light: #4A0E17;
-            --ivory: #FFFDF9;
-            --soft-pink: #F4C2C2;
-            --warm-beige: #F5EBE6;
-            --soft-gray: #7A6E6D;
-            --gold: #D4AF37;
-            --gold-light: #E6B800;
+            --dark-red: #2B040A;
+            --deep-burgundy: #180205;
+            --rose-red: #8B001D;
+            --bright-gold: #FFD700;
+            --soft-gold: #E6C687;
+            --cream-bg: #FFF4F4;
+            --paper-color: #FDF4E7;
+            --white-pure: #FFFFFF;
         }
 
         * {
@@ -26,8 +25,8 @@
         }
 
         body {
-            background-color: var(--burgundy-deep);
-            color: var(--ivory);
+            background-color: var(--deep-burgundy);
+            color: var(--white-pure);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -36,21 +35,17 @@
             position: relative;
         }
 
-        /* خلفية نباتية فاخرة وبتلات */
-        .bg-pattern {
+        /* خلفية ليلية مع بتلات متساقطة */
+        .bg-night {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                radial-gradient(circle at 10% 10%, rgba(212, 175, 55, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 90% 90%, rgba(244, 194, 194, 0.05) 0%, transparent 40%);
+            background: radial-gradient(circle at 50% 20%, #4A0512 0%, #180205 70%);
             z-index: 0;
-            pointer-events: none;
         }
 
-        /* حاوية بتلات الورد المتحركة */
         .petals-container {
             position: fixed;
             top: 0;
@@ -64,76 +59,65 @@
 
         .petal {
             position: absolute;
-            background: rgba(244, 194, 194, 0.25);
+            background: rgba(220, 20, 60, 0.4);
             border-radius: 150% 0 150% 0;
+            box-shadow: 0 0 8px rgba(255, 105, 180, 0.3);
             animation: fall linear infinite;
         }
 
         @keyframes fall {
-            0% {
-                transform: translateY(-10vh) rotate(0deg);
-                opacity: 0;
-            }
-            20% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(110vh) rotate(360deg);
-                opacity: 0;
-            }
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.9; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
-        /* الإطار العام للتجربة */
+        /* الإطار الرئيسي للتطبيق المصمم للجوال */
         .app-container {
             position: relative;
             z-index: 10;
             width: 100%;
-            max-width: 480px;
+            max-width: 440px;
             height: 100vh;
             max-height: 900px;
-            background: linear-gradient(135deg, rgba(45, 8, 14, 0.95), rgba(26, 4, 8, 0.98));
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            background: linear-gradient(180deg, rgba(43, 4, 10, 0.92) 0%, rgba(24, 2, 5, 0.97) 100%);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 50px rgba(139, 0, 29, 0.5);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 25px 20px;
+            padding: 20px;
             overflow: hidden;
         }
 
-        @media (min-width: 481px) {
+        @media (min-width: 441px) {
             .app-container {
-                border-radius: 24px;
-                height: 85vh;
+                border-radius: 28px;
+                height: 90vh;
             }
         }
 
-        /* شريط علوي أدوات التحكم */
+        /* الشريط العُلوي */
         .top-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-size: 13px;
-            color: var(--gold);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+            color: var(--soft-gold);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
             padding-bottom: 10px;
         }
 
-        .btn-text {
+        .btn-restart {
             background: none;
-            border: none;
-            color: var(--soft-pink);
-            font-size: 13px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            color: var(--soft-gold);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
             cursor: pointer;
-            opacity: 0.8;
-            transition: opacity 0.3s;
         }
 
-        .btn-text:hover {
-            opacity: 1;
-        }
-
-        /* محتوى المشاهد */
+        /* منطقة المحتوى */
         .scene-content {
             flex: 1;
             display: flex;
@@ -141,511 +125,129 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px 10px;
-            animation: fadeIn 0.6s ease-in-out;
+            padding: 15px 5px;
+            animation: fadeInScene 0.7s ease;
             overflow-y: auto;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes fadeInScene {
+            from { opacity: 0; transform: scale(0.96); }
+            to { opacity: 1; transform: scale(1); }
         }
 
-        h1, h2 {
-            font-family: serif;
-            color: var(--gold);
-            margin-bottom: 15px;
-            font-weight: normal;
-            letter-spacing: 0.5px;
+        h2 {
+            font-size: 24px;
+            color: var(--soft-gold);
+            margin-bottom: 12px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.6);
         }
 
-        h2 { font-size: 22px; }
         p {
-            font-size: 16px;
+            font-size: 15px;
             line-height: 1.8;
-            color: var(--ivory);
-            margin-bottom: 20px;
-            max-width: 360px;
+            color: var(--paper-color);
+            margin-bottom: 18px;
+            max-width: 340px;
         }
 
-        /* رسومات الزهور الفنية داخل المشاهد */
-        .floral-accent {
-            font-size: 28px;
+        .icon-header {
+            font-size: 32px;
             margin-bottom: 10px;
-            color: var(--gold);
         }
 
-        /* الأزرار التفاعلية الفاخرة */
-        .btn-primary {
-            background: linear-gradient(135deg, var(--burgundy-light), #6B1622);
-            color: var(--ivory);
-            border: 1px solid var(--gold);
+        /* الأزرار الوردية الراقية مثل التصميم */
+        .btn-main {
+            background: linear-gradient(135deg, #A80927 0%, #610012 100%);
+            color: var(--white-pure);
+            border: 1px solid var(--soft-gold);
             padding: 12px 28px;
-            border-radius: 30px;
+            border-radius: 25px;
             font-size: 15px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(168, 9, 39, 0.4);
+            transition: transform 0.2s;
             margin-top: 10px;
-            font-weight: 500;
         }
 
-        .btn-primary:active {
-            transform: scale(0.97);
+        .btn-main:active {
+            transform: scale(0.96);
         }
 
-        /* أزرار الاختيارات والأسئلة */
-        .options-group {
+        /* كرت الظرف العتيق والرسالة */
+        .envelope-card {
+            background: var(--paper-color);
+            color: #333;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            border: 2px dashed #D4A373;
+            width: 100%;
+            max-width: 320px;
+            margin-bottom: 15px;
+        }
+
+        .envelope-card p {
+            color: #4A2E16;
+            font-size: 14px;
+        }
+
+        /* خيارات أسئلة ستايل الصورة */
+        .quiz-group {
             display: flex;
             flex-direction: column;
             gap: 10px;
             width: 100%;
-            max-width: 320px;
-            margin-top: 15px;
+            max-width: 280px;
         }
 
-        .btn-option {
-            background: rgba(255, 253, 249, 0.05);
-            border: 1px solid rgba(244, 194, 194, 0.3);
-            color: var(--ivory);
-            padding: 12px;
-            border-radius: 12px;
-            font-size: 15px;
+        .quiz-btn {
+            background: rgba(255, 244, 244, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            color: var(--white-pure);
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 14px;
             cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-option:hover, .btn-option.selected {
-            background: rgba(212, 175, 55, 0.15);
-            border-color: var(--gold);
-        }
-
-        /* صناديق المفاجآت */
-        .boxes-grid {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 15px;
-        }
-
-        .gift-box {
-            background: rgba(255, 253, 249, 0.07);
-            border: 1px solid var(--gold);
-            border-radius: 15px;
-            padding: 20px 15px;
-            cursor: pointer;
-            transition: transform 0.3s;
-            flex: 1;
-            max-width: 100px;
-            text-align: center;
-        }
-
-        .gift-box:hover {
-            transform: translateY(-5px);
-            background: rgba(212, 175, 55, 0.1);
-        }
-
-        /* صناديق الحديقة التفاعلية */
-        .garden-cards {
-            display: flex;
-            gap: 10px;
-            width: 100%;
-            justify-content: center;
-        }
-
-        .garden-card {
-            background: rgba(255,253,249,0.04);
-            border: 1px solid rgba(212,175,55,0.3);
-            border-radius: 12px;
-            padding: 12px 8px;
-            font-size: 13px;
-            cursor: pointer;
-            flex: 1;
-            transition: 0.3s;
-        }
-
-        .garden-card:hover {
-            border-color: var(--gold);
-            background: rgba(212,175,55,0.1);
-        }
-
-        /* مساحة كتابة الرسالة (المشهد 23) */
-        textarea {
-            width: 100%;
-            max-width: 340px;
-            height: 120px;
-            background: rgba(255, 253, 249, 0.05);
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            border-radius: 12px;
-            padding: 12px;
-            color: var(--ivory);
-            font-size: 15px;
-            resize: none;
-            margin-bottom: 15px;
-            outline: none;
-        }
-
-        textarea:focus {
-            border-color: var(--gold);
-        }
-
-        /* شريط التنقل السفلي بين المشاهد */
-        .nav-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-top: 1px solid rgba(212, 175, 55, 0.15);
-            padding-top: 12px;
-            font-size: 14px;
         }
 
-        .nav-btn {
-            background: none;
-            border: none;
-            color: var(--soft-pink);
-            cursor: pointer;
-            padding: 5px 10px;
-            font-size: 14px;
-            opacity: 0.8;
-        }
-
-        .nav-btn:hover { opacity: 1; }
-        .scene-counter { color: var(--soft-gray); font-size: 12px; }
-
-        /* رسالة النجاح لإرسال رسالتها */
-        .success-msg {
-            color: var(--gold);
-            font-size: 14px;
+        /* كروت الزهور الثلاثة */
+        .flower-grid {
+            display: flex;
+            gap: 8px;
+            width: 100%;
+            justify-content: center;
             margin-top: 10px;
-            display: none;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="bg-pattern"></div>
-    <div class="petals-container" id="petalsContainer"></div>
-
-    <div class="app-container">
-        <!-- الشريط العُلوي -->
-        <div class="top-bar">
-            <span>مفاجأة سارونتي ✨</span>
-            <button class="btn-text" onclick="resetJourney()">إعادة البداية</button>
-        </div>
-
-        <!-- محتوى المشهد المتغير -->
-        <div class="scene-content" id="sceneContainer">
-            <!-- يُحقن محتوى المشهد ديناميكياً عبر الجافاسكريبت -->
-        </div>
-
-        <!-- الشريط السفلي للتنقل -->
-        <div class="nav-footer">
-            <button class="nav-btn" id="prevBtn" onclick="prevScene()">← السابق</button>
-            <span class="scene-counter" id="sceneCounter">1 / 25</span>
-            <button class="nav-btn" id="nextBtn" onclick="nextScene()">التالي →</button>
-        </div>
-    </div>
-
-    <script>
-        // إعداد البتلات المتحركة في الخلفية
-        const petalsContainer = document.getElementById('petalsContainer');
-        for (let i = 0; i < 18; i++) {
-            const petal = document.createElement('div');
-            petal.className = 'petal';
-            petal.style.left = Math.random() * 100 + 'vw';
-            petal.style.top = -10 + Math.random() * -20 + 'vh';
-            petal.style.width = (10 + Math.random() * 12) + 'px';
-            petal.style.height = (15 + Math.random() * 18) + 'px';
-            petal.style.animationDuration = (6 + Math.random() * 7) + 's';
-            petal.style.animationDelay = (Math.random() * 5) + 's';
-            petalsContainer.appendChild(petal);
         }
 
-        // بيانات المشاهد الـ 25 كاملة بدقة واهتمام بالتفاصيل
-        const scenes = [
-            {
-                title: "البداية الغامضة",
-                content: `
-                    <div class="floral-accent">⚜️</div>
-                    <h2>مرحباً بكِ يا سارونتي</h2>
-                    <p>فيه أشياء بالدنيا تصير بالصدفة.. بس مو كلها عادية.<br>هذي الحكاية انكتبت بحبر خاص، لأجل شخص واحد بالذات.</p>
-                    <button class="btn-primary" onclick="nextScene()">اضغطي هنا عشان تبدأ حكايتك..</button>
-                `
-            },
-            {
-                title: "إهداء خاص",
-                content: `
-                    <div class="floral-accent">🤍</div>
-                    <h2>تجربة صُممت بحب</h2>
-                    <p>هذا الموقع ما هو قالب جاهز ولا صفحة عادية.. هذا مسار خاص يجمع ذكرياتنا، ضحكاتنا، وأيامنا الحلوة، تفصيلة بتفصيلة.</p>
-                `
-            },
-            {
-                title: "بداية التعارف",
-                content: `
-                    <div class="floral-accent">🎧</div>
-                    <h2>قبل سنتين تقريباً..</h2>
-                    <p>تعرفنا على بعض في غرفة صوتية داخل تطبيق أو لعبة. في البداية ما كنت أبداً أبحث عن علاقة، كنت أدخل وأسولف وأضحك عادي.</p>
-                `
-            },
-            {
-                title: "كيف تحولت السوالف إلى حب",
-                content: `
-                    <div class="floral-accent">🌷</div>
-                    <h2>من الصداقة إلى القلب</h2>
-                    <p>مع الوقت صرت أدخل الغرفة عشانك أنتِ بالذات، أنتظر سوالفك ولطافتك لحد ما تحولت السالفة بهدوء إلى اهتمام ثم حب كبير بدون ما أحس.</p>
-                `
-            },
-            {
-                title: "قصة الاسم الحقيقي",
-                content: `
-                    <div class="floral-accent">😂</div>
-                    <h2>زلّة لسان لا تُنسى</h2>
-                    <p>كنت أخفي هويتي الحقيقية لفترة وأستخدم اسم ثاني.. وفي أحد المواقف زل لساني وقلت اسمي الحقيقي بالخطأ! تلعثمت وانحرجت، وأنتِ متّي ضحك علي.. وصارت أحلى ذكرى مضحكة بيننا.</p>
-                `
-            },
-            {
-                title: "شفرتنا الخاصة",
-                content: `
-                    <div class="floral-accent">⚡</div>
-                    <h2>شفرة السستم</h2>
-                    <p>جربي تضغطين الزر تحت وتشوفين وش يطلع لك..</p>
-                    <button class="btn-primary" onclick="alert('سارة: أبي السستم 💻\nسلوم: السستم عطلان! 🌻')">«أبي السستم»</button>
-                `
-            },
-            {
-                title: "اختبار الذكريات الصغير",
-                content: `
-                    <div class="floral-accent">🎯</div>
-                    <h2>اختبار سريع</h2>
-                    <p>وش الاسم اللي غالباً إذا ناديتك فيه وأنتِ زعلانة أعرف إن الوضع تمام؟</p>
-                    <div class="options-group">
-                        <button class="btn-option" onclick="selectOption(this)">سليمان</button>
-                        <button class="btn-option" onclick="selectOption(this)">سلوم</button>
-                    </div>
-                `
-            },
-            {
-                title: "ذكرى الغيرة اللطيفة",
-                content: `
-                    <div class="floral-accent">✨</div>
-                    <h2>الغيرة الحلوة</h2>
-                    <p>تتذكرين ديك البنت اللي كانت ترسل رموز وتتعلّق؟ كنتِ تغارين وتكتمين بنفسك لأن علاقتنا ما كانت رسمية وقتها.. والى اليوم ما تدانينها! ترى والله ما كان في بالي غيرك أنتِ.</p>
-                `
-            },
-            {
-                title: "مشهد التلة والطريق",
-                content: `
-                    <div class="floral-accent">🌙</div>
-                    <h2>طريق التلة</h2>
-                    <p>ذاك الطريق والمرتفع القريب من بيتك.. كنا نروح له بأوقات مختلفة ونصور نفس المكان لأن المسافة بيننا كانت تمنعنا نلتقي، بس أرواحنا كانت تلتقي هناك دائماً.</p>
-                `
-            },
-            {
-                title: "أيام الدورة العسكرية",
-                content: `
-                    <div class="floral-accent">⭐</div>
-                    <h2>26 يوماً من الشوق</h2>
-                    <p>غبت عنك 26 يوماً في الدورة العسكرية، ومعها أشهر الغياب المتفرقة.. كنتِ ترسلين تفاصيل يومك، وتبكين أحيانًا من الشوق، وتنتظرين أوقات التواصل بفارغ الصبر.</p>
-                `
-            },
-            {
-                title: "امتنان لوقفتك",
-                content: `
-                    <div class="floral-accent">🤍</div>
-                    <h2>سند وخير رفيق</h2>
-                    <p>في أوف الخميس والجمعة، كنتِ تسهرين وتتركين لي رسائل تشجيع ترفع من معنوياتي وتجبر خاطري.. صبرك ووقفتك معي بهديك الأيام ما أنساها أبداً.</p>
-                `
-            },
-            {
-                title: "فترة الضيق في الرياض والخرج",
-                content: `
-                    <div class="floral-accent">🌻</div>
-                    <h2>أيام الثقل والتعب</h2>
-                    <p>يوم كنت بالرياض أو الخرج وأمر بفترة نفسية وصعبة، كنتِ تحسين فيني وتسوين المستحيل عشان تفتحين نفسي وتغيرين جوي، حتى وأنتِ في أوقات متعبة.. شكراً لأنك كنتِ طوق نجاة.</p>
-                `
-            },
-            {
-                title: "الأشياء التي أحبها فيكِ",
-                content: `
-                    <div class="floral-accent">💫</div>
-                    <h2>سارونتي بكل تفاصيلها</h2>
-                    <p>أحب ضحكتك، صوتك، سوالفك، ودلعك وحنانك.. وجودك ينسيني تعب أشياء كثيرة بالدنيا، وأشوفك إنسانة ناضجة ومميزة ولا تشبهين أحد.</p>
-                `
-            },
-            {
-                title: "حديقة الزهور التفاعلية",
-                content: `
-                    <div class="floral-accent">💐</div>
-                    <h2>حديقتك الخاصة</h2>
-                    <p>اختاري زهرتك المفضلة واكتشفي رسالتها:</p>
-                    <div class="garden-cards" style="margin-top:15px;">
-                        <div class="garden-card" onclick="alert('الليليوم والزنبق: يمثلون رقتك وفخامتك العالية.')">الليليوم</div>
-                        <div class="garden-card" onclick="alert('التوليب الأبيض: نقاء قلبك وطيبتك اللي ما مثلها.')">التوليب الأبيض</div>
-                        <div class="garden-card" onclick="alert('دوار الشمس: بهجة يومي وسر ضحكتك.')">دوار الشمس</div>
-                    </div>
-                `
-            },
-            {
-                title: "الألوان التي تشبهك",
-                content: `
-                    <div class="floral-accent">🎨</div>
-                    <h2>لوحة ألوانك</h2>
-                    <p>البرغندي الفخم، الأبيض العاجي، الوردي الهادئ، والذهبي المستوحى من دوار الشمس.. ألوان تعكس جزءاً من ذوقك الراقي والناعم.</p>
-                `
-            },
-            {
-                title: "صندوق المفاجأة الأول",
-                content: `
-                    <div class="floral-accent">🎁</div>
-                    <h2>صندوق الذكريات (1)</h2>
-                    <p>اضغطي لاكتشاف الرسالة المخفية:</p>
-                    <button class="btn-primary" onclick="alert('أنتِ طوق النجاة اللي جاني في أثقل الأوقات وأجملها.')">افتحي الصندوق الأول</button>
-                `
-            },
-            {
-                title: "صندوق المفاجأة الثاني",
-                content: `
-                    <div class="floral-accent">🎁</div>
-                    <h2>صندوق المشاعر (2)</h2>
-                    <p>اضغطي لاكتشاف الرسالة المخفية:</p>
-                    <button class="btn-primary" onclick="alert('كلمة «أحبك» تحسها صغيرة قدام كل المعزة والعمق اللي بقلبي لك.')">افتحي الصندوق الثاني</button>
-                `
-            },
-            {
-                title: "صندوق المفاجأة الثالث",
-                content: `
-                    <div class="floral-accent">🎁</div>
-                    <h2>صندوق الأماني (3)</h2>
-                    <p>اضغطي لاكتشاف الرسالة المخفية:</p>
-                    <button class="btn-primary" onclick="alert('ما أبغاك لحظة جميلة وتعدي.. أبغاك بكل أيامي الجاية وتفاصيل عمري.')">افتحي الصندوق الثالث</button>
-                `
-            },
-            {
-                title: "رسالة حب من القلب",
-                content: `
-                    <div class="floral-accent">💌</div>
-                    <h2>إلى سارونتي</h2>
-                    <p>مهما كتبت وسولفت، يبقى الكلام قاصر قدام غلاك.. وجودك بحياتي هو النعمة الكبيرة اللي أحمد ربي عليها دايم، وعسى ربِي يخليك لي ولا يحرمني منك.</p>
-                `
-            },
-            {
-                title: "المستقبل والأيام القادمة",
-                content: `
-                    <div class="floral-accent">🌅</div>
-                    <h2>حكاية بكرة</h2>
-                    <p>الأيام الجاية بإذن الله بتجمعنا على خير، وتبدأ حكايتنا الحقيقية تحت سقف واحد وبدون مسافات ولا شاشات تفصلنا.</p>
-                `
-            },
-            {
-                title: "أمنية السنة الجديدة",
-                content: `
-                    <div class="floral-accent">🕯️</div>
-                    <h2>سنتك الجديدة</h2>
-                    <p>عسى سنة عيد ميلادك هذي تكون ألطف وأجمل سنة عليك، مليانة فرح، وصحة، وتحقيق لكل أمانيك يا رب.</p>
-                `
-            },
-            {
-                title: "امتنان عميق",
-                content: `
-                    <div class="floral-accent">🌹</div>
-                    <h2>شكراً لكل شي</h2>
-                    <p>شكراً لكل ضحكة ضحكناها مع بعض، ولكل لحظة صبرتي فيها معي.. أنتِ الإنسانة اللي تركت أثر ما يُمحى بقلبي.</p>
-                `
-            },
-            {
-                title: "مساحة سارونتي الخاصة",
-                content: `
-                    <div class="floral-accent">✍️</div>
-                    <h2>اكتبي لي رسالة أو أمنية..</h2>
-                    <p>هذي المساحة لك أنتِ، اكتبي فيها أي شي بخاطرك لسلوم:</p>
-                    <textarea id="sarahMessage" placeholder="اكتبي هنا.."></textarea>
-                    <button class="btn-primary" onclick="sendSarahMessage()">إرسال الرسالة</button>
-                    <div class="success-msg" id="successMsg">تم حفظ رسالتك ووصلت لسلوم بكل حب! ✨</div>
-                `
-            },
-            {
-                title: "تهنئة عيد الميلاد",
-                content: `
-                    <div class="floral-accent">🎉</div>
-                    <h2>كل عام وأنتِ بخير</h2>
-                    <p>كل عام وأنتِ أعيادي، يا أجمل من عرفت، ويا سوسو الغالية على قلبي.. عسى عيد ميلادك ينعاد عليك وأنتِ بألف خير وسعادة.</p>
-                `
-            },
-            {
-                title: "الخاتمة",
-                content: `
-                    <div class="floral-accent">🤍</div>
-                    <h2>من سلوم.. بكل الحب</h2>
-                    <p>انتهت رحلتنا هنا، لكن حكايتنا الحقيقية توها تبدأ.<br><br><b>أحبك يا سارونتي.</b></p>
-                    <button class="btn-primary" onclick="resetJourney()">إعادة الرحلة من البداية ↺</button>
-                `
-            }
-        ];
-
-        let currentScene = parseInt(localStorage.getItem('saronti_scene')) || 0;
-
-        function renderScene() {
-            const container = document.getElementById('sceneContainer');
-            const counter = document.getElementById('sceneCounter');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-
-            container.innerHTML = scenes[currentScene].content;
-            counter.innerText = `${currentScene + 1} / ${scenes.length}`;
-
-            prevBtn.style.visibility = currentScene === 0 ? 'hidden' : 'visible';
-            nextBtn.style.visibility = currentScene === scenes.length - 1 ? 'hidden' : 'visible';
-
-            // حفظ التقدم تلقائياً
-            localStorage.setItem('saronti_scene', currentScene);
+        .flower-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 12px;
+            padding: 10px 5px;
+            font-size: 12px;
+            cursor: pointer;
+            flex: 1;
         }
 
-        function nextScene() {
-            if (currentScene < scenes.length - 1) {
-                currentScene++;
-                renderScene();
-            }
+        /* مربع النص لكتابة الرسالة */
+        textarea {
+            width: 100%;
+            max-width: 320px;
+            height: 100px;
+            background: rgba(255, 244, 244, 0.15);
+            border: 1px solid var(--soft-gold);
+            border-radius: 12px;
+            padding: 10px;
+            color: var(--white-pure);
+            font-size: 14px;
+            resize: none;
+            outline: none;
+            margin-bottom: 12px;
         }
 
-        function prevScene() {
-            if (currentScene > 0) {
-                currentScene--;
-                renderScene();
-            }
-        }
-
-        function resetJourney() {
-            if (confirm("هل تريدين إعادة الرحلة من البداية؟")) {
-                currentScene = 0;
-                localStorage.setItem('saronti_scene', 0);
-                renderScene();
-            }
-        }
-
-        function selectOption(btn) {
-            document.querySelectorAll('.btn-option').forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
-            setTimeout(nextScene, 600);
-        }
-
-        function sendSarahMessage() {
-            const msg = document.getElementById('sarahMessage').value;
-            if(msg.trim() !== "") {
-                // حفظ الرسالة في localStorage كنسخة احتياطية محلية مضمونة
-                let messages = JSON.parse(localStorage.getItem('sarah_messages') || '[]');
-                messages.push({text: msg, date: new Date().toLocaleString()});
-                localStorage.setItem('sarah_messages', JSON.stringify(messages));
-                
-                document.getElementById('successMsg').style.display = 'block';
-                document.getElementById('sarahMessage').value = '';
-            } else {
-                alert("الرجاء كتابة شيء قبل الإرسال يا سارونتي..");
-            }
-        }
-
-        // تشغيل المشهد الحالي عند تحميل الصفحة
-        renderScene();
-    </script>
-</body>
-</html>
+        /* النافذة المنبثقة التفاعلية */
+        .custom-popup {
+            
