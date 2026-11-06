@@ -11,7 +11,6 @@
             --rose-red: #8B001D;
             --bright-gold: #FFD700;
             --soft-gold: #E6C687;
-            --cream-bg: #FFF4F4;
             --paper-color: #FDF4E7;
             --white-pure: #FFFFFF;
         }
@@ -35,7 +34,6 @@
             position: relative;
         }
 
-        /* خلفية ليلية مع بتلات متساقطة */
         .bg-night {
             position: fixed;
             top: 0;
@@ -71,7 +69,6 @@
             100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
-        /* الإطار الرئيسي للتطبيق المصمم للجوال */
         .app-container {
             position: relative;
             z-index: 10;
@@ -96,7 +93,6 @@
             }
         }
 
-        /* الشريط العُلوي */
         .top-bar {
             display: flex;
             justify-content: space-between;
@@ -117,7 +113,6 @@
             cursor: pointer;
         }
 
-        /* منطقة المحتوى */
         .scene-content {
             flex: 1;
             display: flex;
@@ -155,7 +150,6 @@
             margin-bottom: 10px;
         }
 
-        /* الأزرار الوردية الراقية مثل التصميم */
         .btn-main {
             background: linear-gradient(135deg, #A80927 0%, #610012 100%);
             color: var(--white-pure);
@@ -169,11 +163,8 @@
             margin-top: 10px;
         }
 
-        .btn-main:active {
-            transform: scale(0.96);
-        }
+        .btn-main:active { transform: scale(0.96); }
 
-        /* كرت الظرف العتيق والرسالة */
         .envelope-card {
             background: var(--paper-color);
             color: #333;
@@ -191,7 +182,6 @@
             font-size: 14px;
         }
 
-        /* خيارات أسئلة ستايل الصورة */
         .quiz-group {
             display: flex;
             flex-direction: column;
@@ -213,7 +203,6 @@
             align-items: center;
         }
 
-        /* كروت الزهور الثلاثة */
         .flower-grid {
             display: flex;
             gap: 8px;
@@ -232,7 +221,6 @@
             flex: 1;
         }
 
-        /* مربع النص لكتابة الرسالة */
         textarea {
             width: 100%;
             max-width: 320px;
@@ -248,6 +236,333 @@
             margin-bottom: 12px;
         }
 
-        /* النافذة المنبثقة التفاعلية */
         .custom-popup {
-            
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .custom-popup.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .popup-box {
+            background: linear-gradient(135deg, #4A0512, #180205);
+            border: 1px solid var(--soft-gold);
+            padding: 22px 18px;
+            border-radius: 20px;
+            max-width: 310px;
+            width: 88%;
+            text-align: center;
+        }
+
+        .bottom-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+            padding-top: 10px;
+        }
+
+        .nav-link {
+            background: none;
+            border: none;
+            color: var(--soft-gold);
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .counter { font-size: 11px; color: rgba(255,255,255,0.5); }
+    </style>
+</head>
+<body>
+
+    <div class="bg-night"></div>
+    <div class="petals-container" id="petals"></div>
+
+    <div class="custom-popup" id="popup" onclick="hidePopup()">
+        <div class="popup-box" onclick="event.stopPropagation()">
+            <div class="icon-header">❤️</div>
+            <p id="popupContent" style="color:var(--white-pure); font-size:15px; margin-bottom:15px;"></p>
+            <button class="btn-main" onclick="hidePopup()">إغلاق</button>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <div class="top-bar">
+            <span>مفاجأة سارونتي ❤️</span>
+            <button class="btn-restart" onclick="resetAll()">إعادة البداية ↺</button>
+        </div>
+
+        <div class="scene-content" id="sceneBody"></div>
+
+        <div class="bottom-nav">
+            <button class="nav-link" id="prevB" onclick="goPrev()">← السابق</button>
+            <span class="counter" id="sceneNum">1 / 25</span>
+            <button class="nav-link" id="nextB" onclick="goNext()">التالي →</button>
+        </div>
+    </div>
+
+    <script>
+        const petalsBox = document.getElementById('petals');
+        for (let i = 0; i < 20; i++) {
+            const p = document.createElement('div');
+            p.className = 'petal';
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.top = -10 + Math.random() * -20 + 'vh';
+            p.style.width = (10 + Math.random() * 10) + 'px';
+            p.style.height = (14 + Math.random() * 14) + 'px';
+            p.style.animationDuration = (5 + Math.random() * 6) + 's';
+            p.style.animationDelay = (Math.random() * 4) + 's';
+            petalsBox.appendChild(p);
+        }
+
+        function showPopup(text) {
+            document.getElementById('popupContent').innerText = text;
+            document.getElementById('popup').classList.add('active');
+        }
+
+        function hidePopup() {
+            document.getElementById('popup').classList.remove('active');
+        }
+
+        const scenes = [
+            {
+                title: "سارونتي ❤️",
+                content: `
+                    <div class="icon-header">🌙</div>
+                    <h2>يا أجمل صدفة في حياتي</h2>
+                    <p>هذه الحكاية صُممت لكِ خصيصاً لتكشف ذكرياتنا ومشاعرنا خطوة بخطوة..</p>
+                    <button class="btn-main" onclick="goNext()">اضغطي لتكتشفي المفاجأة ❤️</button>
+                `
+            },
+            {
+                title: "لغز البداية 🔒",
+                content: `
+                    <div class="envelope-card">
+                        <div class="icon-header">💌</div>
+                        <p>لديك رسالة سرية.. لكن قبل أن تقرأيها، أجيبي عن السؤال التالي:</p>
+                        <p><b>ما هو الشيء الذي يجمع بيننا ولا يراه أحد؟</b></p>
+                    </div>
+                    <div class="quiz-group">
+                        <button class="quiz-btn" onclick="goNext()">الوقت ❤️</button>
+                        <button class="quiz-btn" onclick="goNext()">المسافة ❤️</button>
+                        <button class="quiz-btn" onclick="goNext()">الحب ❤️</button>
+                    </div>
+                `
+            },
+            {
+                title: "ألغاز بيننا 💭",
+                content: `
+                    <div class="icon-header">👑</div>
+                    <h2>أين التقينا أول مرة؟</h2>
+                    <p>اختبري ذاكرتك معنا.. كم تعرفين عن حكايتنا؟</p>
+                    <div class="quiz-group">
+                        <button class="quiz-btn" onclick="goNext()">في اللعبة / الغرفة الصوتية ❤️</button>
+                        <button class="quiz-btn" onclick="goNext()">في الدردشة ❤️</button>
+                    </div>
+                `
+            },
+            {
+                title: "قصتنا الجميلة ❤️",
+                content: `
+                    <div class="icon-header">🎮</div>
+                    <h2>من صوت إلى قلب</h2>
+                    <p>من صوت في غرفة لعب.. إلى أجمل قصة حب. ومن أصدقاء.. إلى روحين لا تكتمل سعادتهما إلا معاً ❤️</p>
+                    <button class="btn-main" onclick="goNext()">أكمل القصة ❤️</button>
+                `
+            },
+            {
+                title: "اسم هويتي الحقيقية",
+                content: `
+                    <div class="icon-header">😅</div>
+                    <h2>زلّة لسان وموقف محرج</h2>
+                    <p>يوم زل لساني وقلت اسمي الحقيقي بالخطأ وانحرجت وتلعثمت، وأنتِ متّي ضحك علي.. وصارت أحلى ذكرى نبتسم كل ما تذكرناها.</p>
+                `
+            },
+            {
+                title: "شفرتنا الخاصة ⚡",
+                content: `
+                    <div class="icon-header">💻</div>
+                    <h2>شفرة السستم</h2>
+                    <p>جربي تضغطين الزر تحت وتشوفين الرد..</p>
+                    <button class="btn-main" onclick="showPopup('سارة: أبي السستم\n\nسلوم: السستم عطلان! 🌻')">«أبي السستم»</button>
+                `
+            },
+            {
+                title: "ذكرياتنا معاً 📷",
+                content: `
+                    <div class="icon-header">🏞️</div>
+                    <h2>صور.. ضحكات لا تُنسى</h2>
+                    <p>تتذكرين الجبل والتلة والطريق القريب من بيتك؟ كنا نمر منه ونصور نفس المكان لأن المسافة تمنعنا نلتقي.. بس قلوبنا كانت تلتقي هناك.</p>
+                `
+            },
+            {
+                title: "الغيرة اللطيفة ✨",
+                content: `
+                    <div class="icon-header">🙈</div>
+                    <h2>الغيرة الحلوة</h2>
+                    <p>تتذكرين ديك البنت اللي كانت ترسل رموز قبلات؟ كنتِ تغارين وتكتمين بنفسك.. والى اليوم ما تدانينها! ترى والله ما كان بقلبي إلا أنتِ.</p>
+                `
+            },
+            {
+                title: "أيام الدورة العسكرية 🎖️",
+                content: `
+                    <div class="icon-header">⏳</div>
+                    <h2>26 يوماً من الصبر</h2>
+                    <p>26 يوم غبتها بالدورة العسكرية، ومعها أشهر الغياب المتفرقة.. كنتِ تصبرين وتنتظرين أوقات التواصل، وفي الويكند تسهرين وتخلين لي رسائل تشجعني.</p>
+                `
+            },
+            {
+                title: "وقفتك معي وقت الضيق",
+                content: `
+                    <div class="icon-header">🌟</div>
+                    <h2>طوق النجاة</h2>
+                    <p>يوم كنت بالرياض والخرج وأمر بأيام نفسية وصعبة، كنتِ تحسين فيني وتسوين المستحيل عشان تسعديني وتغيرين جوي.. شكراً لأنك كنتِ سندي.</p>
+                `
+            },
+            {
+                title: "زهور الحب 💐",
+                content: `
+                    <div class="icon-header">🌸</div>
+                    <h2>أي زهرة تفضلين؟</h2>
+                    <p>كل وردة تحمل معاني خاصة لكِ ❤️</p>
+                    <div class="flower-grid">
+                        <div class="flower-card" onclick="showPopup('الليليوم: يمثل رقتك وفخامتك العالية.')">الليليوم 🌺</div>
+                        <div class="flower-card" onclick="showPopup('التوليب الأبيض: نقاء قلبك وطيبتك.')">التوليب 🌷</div>
+                        <div class="flower-card" onclick="showPopup('دوار الشمس: سر ضحكتك وبهجة أيامي.')">دوار الشمس 🌻</div>
+                    </div>
+                `
+            },
+            {
+                title: "تفاصيل أحبها فيكِ",
+                content: `
+                    <div class="icon-header">✨</div>
+                    <h2>ضحكتك وصوتك</h2>
+                    <p>أحب ضحكتك، صوتك، سوالفك، ودلعك وحنانك.. وجودك ينسيني تعب أشياء كثيرة، وأشوفك إنسانة مميزة وما تشبهين أحد.</p>
+                `
+            },
+            {
+                title: "صناديق المفاجآت 🎁",
+                content: `
+                    <div class="icon-header">🎁</div>
+                    <h2>افتحي الصندوق الأول</h2>
+                    <p>افتحي الصندوق واكتشفي ما بداخله من قلبي ❤️</p>
+                    <button class="btn-main" onclick="showPopup('أنتِ طوق النجاة اللي جاني في أثقل الأوقات.')">🎁 فتح الصندوق</button>
+                `
+            },
+            {
+                title: "صندوق المفاجأة الثاني 🎁",
+                content: `
+                    <div class="icon-header">🎁</div>
+                    <h2>صندوق المشاعر</h2>
+                    <p>اضغطي لرؤية الرسالة المخفية ❤️</p>
+                    <button class="btn-main" onclick="showPopup('كلمة «أحبك» تحسها صغيرة قدام كل المعزة اللي بقلبي لك.')">🎁 فتح الصندوق</button>
+                `
+            },
+            {
+                title: "صندوق المفاجأة الثالث 🎁",
+                content: `
+                    <div class="icon-header">🎁</div>
+                    <h2>صندوق الأماني</h2>
+                    <p>اضغطي لرؤية الرسالة المخفية ❤️</p>
+                    <button class="btn-main" onclick="showPopup('ما أبغاك لحظة جميلة وتعدي.. أبغاك بكل أيامي الجاية.')">🎁 فتح الصندوق</button>
+                `
+            },
+            {
+                title: "رسالة حب من سلوم 💌",
+                content: `
+                    <div class="envelope-card">
+                        <div class="icon-header">📜</div>
+                        <p><b>إلى سارونتي ❤️</b></p>
+                        <p>مهما كتبت وسولفت، يبقى الكلام قاصر قدام غلاك.. وجودك بحياتي هو النعمة الكبيرة اللي أحمد ربي عليها دايم.</p>
+                    </div>
+                `
+            },
+            {
+                title: "المسافة لا تفرق ☕",
+                content: `
+                    <div class="icon-header">☕</div>
+                    <h2>أنتِ دائماً معي</h2>
+                    <p>حتى لو كنا بعيدين.. وجودك في قلبي يجعلني أشعر أنكِ بجانبي دائماً ❤️</p>
+                `
+            },
+            {
+                title: "حلم المستقبل 🌅",
+                content: `
+                    <div class="icon-header">💍</div>
+                    <h2>حكايتنا الجاية</h2>
+                    <p>الأيام الجاية بإذن الله بتجمعنا على خير، وتبدأ حكايتنا الحقيقية تحت سقف واحد وبدون مسافات تفصلنا.</p>
+                `
+            },
+            {
+                title: "أمنية سنتك الجديدة 🕯️",
+                content: `
+                    <div class="icon-header">🕯️</div>
+                    <h2>سنة خير وسعادة</h2>
+                    <p>عسى سنة عيد ميلادك هذي تكون ألطف وأجمل سنة عليك، مليانة فرح، وصحة، وتحقيق لكل أمانيك يا رب.</p>
+                `
+            },
+            {
+                title: "رسائلي لكِ ❤️",
+                content: `
+                    <div class="icon-header">✍️</div>
+                    <h2>اكتبي رسالتك لي..</h2>
+                    <p>اكتبي رسالتك أو أمنيتك لي وستحتفظ بها للأبد ❤️</p>
+                    <textarea id="msgBox" placeholder="اكتبي رسالتك هنا.."></textarea>
+                    <button class="btn-main" onclick="saveMsg()">إرسال الرسالة ❤️</button>
+                `
+            },
+            {
+                title: "شكراً لكِ يا سارونتي ❤️",
+                content: `
+                    <div class="icon-header">🌹</div>
+                    <h2>لأنكِ في حياتي</h2>
+                    <p>ولأنكِ تجعلين العالم أجمل، ولأنكِ دائماً مختلفة.. أحبك بعمق.. إلى الأبد ❤️</p>
+                `
+            },
+            {
+                title: "مفاجأة صغيرة لكِ 🎁",
+                content: `
+                    <div class="icon-header">🌹</div>
+                    <h2>بمناسبة عيد ميلادك..</h2>
+                    <p>هذه هدية صُممت بكل حب من أجلك ❤️</p>
+                    <button class="btn-main" onclick="goNext()">كل عام وأنتِ بخير يا سارونتي ❤️</button>
+                `
+            },
+            {
+                title: "رسائلك السابقة 💬",
+                content: `
+                    <div class="envelope-card">
+                        <div class="icon-header">💬</div>
+                        <p>هنا تجدين الرسائل المخزنة التي كتبتِها ❤️</p>
+                        <p id="savedShow" style="font-size:13px; color:#A80927; font-weight:bold;">(لا توجد رسائل مكتوبة بعد)</p>
+                    </div>
+                `
+            },
+            {
+                title: "عيد ميلاد سعيد 🎉",
+                content: `
+                    <div class="icon-header">🎂</div>
+                    <h2>سارونتي..</h2>
+                    <p>كل عام وأنتِ أعيادي، وكل عام وأنا أحمد ربي إنك بحياتي.. أحبك.. أحبك.. أحبك ❤️</p>
+                `
+            },
+            {
+                title: "الخاتمة ❤️",
+                content: `
+                    <div class="icon-header">🤍</div>
+                    <h2>أنتِ قصتي الأجمل..</h2>
+                    <p>وأجمل ما في أيامي ❤️<br><br><b>من سلوم.. بكل الحب</b></p>
+                    <button class="btn-main
