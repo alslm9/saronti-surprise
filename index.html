@@ -6,10 +6,7 @@
     <title>سارونتي | أجمل حكاية</title>
     <style>
         :root {
-            --dark-red: #2B040A;
             --deep-burgundy: #180205;
-            --rose-red: #8B001D;
-            --bright-gold: #FFD700;
             --soft-gold: #E6C687;
             --paper-color: #FDF4E7;
             --white-pure: #FFFFFF;
@@ -59,7 +56,6 @@
             position: absolute;
             background: rgba(220, 20, 60, 0.4);
             border-radius: 150% 0 150% 0;
-            box-shadow: 0 0 8px rgba(255, 105, 180, 0.3);
             animation: fall linear infinite;
         }
 
@@ -76,9 +72,9 @@
             max-width: 440px;
             height: 100vh;
             max-height: 900px;
-            background: linear-gradient(180deg, rgba(43, 4, 10, 0.92) 0%, rgba(24, 2, 5, 0.97) 100%);
+            background: linear-gradient(180deg, rgba(43, 4, 10, 0.95) 0%, rgba(24, 2, 5, 0.99) 100%);
             border: 1px solid rgba(255, 215, 0, 0.3);
-            box-shadow: 0 0 50px rgba(139, 0, 29, 0.5);
+            box-shadow: 0 0 40px rgba(139, 0, 29, 0.5);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -121,20 +117,19 @@
             align-items: center;
             text-align: center;
             padding: 15px 5px;
-            animation: fadeInScene 0.7s ease;
+            animation: fadeInScene 0.5s ease;
             overflow-y: auto;
         }
 
         @keyframes fadeInScene {
-            from { opacity: 0; transform: scale(0.96); }
+            from { opacity: 0; transform: scale(0.97); }
             to { opacity: 1; transform: scale(1); }
         }
 
         h2 {
-            font-size: 24px;
+            font-size: 22px;
             color: var(--soft-gold);
             margin-bottom: 12px;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.6);
         }
 
         p {
@@ -146,7 +141,7 @@
         }
 
         .icon-header {
-            font-size: 32px;
+            font-size: 30px;
             margin-bottom: 10px;
         }
 
@@ -158,19 +153,15 @@
             border-radius: 25px;
             font-size: 15px;
             cursor: pointer;
-            box-shadow: 0 5px 20px rgba(168, 9, 39, 0.4);
-            transition: transform 0.2s;
+            box-shadow: 0 4px 15px rgba(168, 9, 39, 0.4);
             margin-top: 10px;
         }
-
-        .btn-main:active { transform: scale(0.96); }
 
         .envelope-card {
             background: var(--paper-color);
             color: #333;
-            padding: 20px;
+            padding: 18px;
             border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
             border: 2px dashed #D4A373;
             width: 100%;
             max-width: 320px;
@@ -198,9 +189,6 @@
             border-radius: 20px;
             font-size: 14px;
             cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
 
         .flower-grid {
@@ -224,7 +212,7 @@
         textarea {
             width: 100%;
             max-width: 320px;
-            height: 100px;
+            height: 90px;
             background: rgba(255, 244, 244, 0.15);
             border: 1px solid var(--soft-gold);
             border-radius: 12px;
@@ -260,10 +248,10 @@
         .popup-box {
             background: linear-gradient(135deg, #4A0512, #180205);
             border: 1px solid var(--soft-gold);
-            padding: 22px 18px;
+            padding: 20px;
             border-radius: 20px;
-            max-width: 310px;
-            width: 88%;
+            max-width: 300px;
+            width: 85%;
             text-align: center;
         }
 
@@ -315,8 +303,14 @@
     </div>
 
     <script>
+        // تنظيف الذاكرة القديمة التالفة لضمان عمل الموقع فوراً
+        if (!localStorage.getItem('saronti_version_v2')) {
+            localStorage.clear();
+            localStorage.setItem('saronti_version_v2', 'true');
+        }
+
         const petalsBox = document.getElementById('petals');
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 18; i++) {
             const p = document.createElement('div');
             p.className = 'petal';
             p.style.left = Math.random() * 100 + 'vw';
@@ -352,7 +346,7 @@
                 content: `
                     <div class="envelope-card">
                         <div class="icon-header">💌</div>
-                        <p>لديك رسالة سرية.. لكن قبل أن تقرأيها، أجيبي عن السؤال التالي:</p>
+                        <p>لديك رسالة سرية.. أجيبي عن السؤال:</p>
                         <p><b>ما هو الشيء الذي يجمع بيننا ولا يراه أحد؟</b></p>
                     </div>
                     <div class="quiz-group">
@@ -397,7 +391,7 @@
                     <div class="icon-header">💻</div>
                     <h2>شفرة السستم</h2>
                     <p>جربي تضغطين الزر تحت وتشوفين الرد..</p>
-                    <button class="btn-main" onclick="showPopup('سارة: أبي السستم\n\nسلوم: السستم عطلان! 🌻')">«أبي السستم»</button>
+                    <button class="btn-main" onclick="showPopup('سارة: أبي السستم\\n\\nسلوم: السستم عطلان! 🌻')">«أبي السستم»</button>
                 `
             },
             {
@@ -565,4 +559,72 @@
                     <div class="icon-header">🤍</div>
                     <h2>أنتِ قصتي الأجمل..</h2>
                     <p>وأجمل ما في أيامي ❤️<br><br><b>من سلوم.. بكل الحب</b></p>
-                    <button class="btn-main
+                    <button class="btn-main" onclick="resetAll()">إعادة الرحلة من البداية ↺</button>
+                `
+            }
+        ];
+
+        let currIndex = parseInt(localStorage.getItem('saronti_scene_idx')) || 0;
+        if (isNaN(currIndex) || currIndex >= scenes.length) currIndex = 0;
+
+        function loadScene() {
+            const body = document.getElementById('sceneBody');
+            const num = document.getElementById('sceneNum');
+            const prevB = document.getElementById('prevB');
+            const nextB = document.getElementById('nextB');
+
+            body.innerHTML = scenes[currIndex].content;
+            num.innerText = `${currIndex + 1} / ${scenes.length}`;
+
+            prevB.style.visibility = currIndex === 0 ? 'hidden' : 'visible';
+            nextB.style.visibility = currIndex === scenes.length - 1 ? 'hidden' : 'visible';
+
+            localStorage.setItem('saronti_scene_idx', currIndex);
+
+            if (currIndex === 22) {
+                let msgs = JSON.parse(localStorage.getItem('sarah_msgs_list') || '[]');
+                if(msgs.length > 0) {
+                    document.getElementById('savedShow').innerText = `"${msgs[msgs.length-1]}"`;
+                }
+            }
+        }
+
+        function goNext() {
+            if (currIndex < scenes.length - 1) {
+                currIndex++;
+                loadScene();
+            }
+        }
+
+        function goPrev() {
+            if (currIndex > 0) {
+                currIndex--;
+                loadScene();
+            }
+        }
+
+        function resetAll() {
+            if (confirm("هل تريدين إعادة الحكاية من البداية؟")) {
+                currIndex = 0;
+                localStorage.setItem('saronti_scene_idx', 0);
+                loadScene();
+            }
+        }
+
+        function saveMsg() {
+            const val = document.getElementById('msgBox').value;
+            if(val.trim() !== "") {
+                let msgs = JSON.parse(localStorage.getItem('sarah_msgs_list') || '[]');
+                msgs.push(val);
+                localStorage.setItem('sarah_msgs_list', JSON.stringify(msgs));
+                showPopup('تم إرسال رسالتك وحفظها بنجاح ليقرأها سلوم! ❤️');
+                document.getElementById('msgBox').value = '';
+            } else {
+                showPopup('اكتبي شيئاً لطيفاً قبل الإرسال يا سارونتي ❤️');
+            }
+        }
+
+        loadScene();
+    </script>
+</body>
+</html>
